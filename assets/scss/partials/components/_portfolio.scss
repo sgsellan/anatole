@@ -118,7 +118,7 @@
         }
         border-bottom: 0px;
         width: 60%;
-        margin-top: -48px;
+        margin-top: 20px;
       }
     }
 
@@ -130,16 +130,37 @@
   }
 
   &__meta {
-    display: flex;
+    display: block;
     flex-wrap: wrap;
     list-style: none;
     padding: 0;
     row-gap: 0.8rem;
+    
 
     &-item {
+      
       &:not(:last-child) {
         margin-right: 1.25rem;
       }
+      &-authors {
+        
+        // make italic
+        // font-style: italic;
+        &-me{
+          // make bold
+          font-weight: 600;
+        }
+      }
+      &-venue {
+        margin-top: 10px;
+        // make italic
+        font-style: italic;
+        // make grey-ish
+        color: #777;
+      }
+
+
+
     }
   }
 
@@ -149,6 +170,7 @@
     position: relative;
     outline: 0;
     background: transparent;
+    margin-bottom: 10px;
 
     text-align: center;
     text-decoration: none;

@@ -1,5 +1,6 @@
 {{ define "main" }}
-  {{ range $index, $elemen:= .Site.Data.portfolio.portfolioitems }}
+{{ $root := . }}
+  <!-- {{ range $index, $elemen:= .Site.Data.portfolio.portfolioitems }} -->
     <div
       class="post {{ with .Site.Params.doNotLoadAnimations }}
         .
@@ -7,46 +8,66 @@
         animated fadeInDown
       {{ end }}"
     >
-      {{ $anchorTitle := delimit (split .title " ") "" }}
-      <h2 class="portfolio__title" id="{{ $anchorTitle | lower }}">{{ title .title }}</h2>
-      {{ range $i, $p := .portfolioitem }}
+      {{ $anchorTitle := "publications" }}
+      <h2 class="portfolio__title" id="{{ $anchorTitle | lower }}"> Journal & Conference Publications</h2>
+      <!-- debugging -->
+      
+      <!-- {{ printf "%#v" $root.Site.Data }} -->
+      {{ $counter := 0 }}
+      {{ $publications := sort $root.Site.Data.publications "date" "desc" }}
+      {{ range $filename, $p := $publications }}
         <div class="portfolio">
-          {{ if .image }}
+          {{ if $p.image }}
             <div
-              class="portfolio__image-wrapper {{ if (modBool $i 2) }}
+              class="portfolio__image-wrapper {{ if (modBool $counter 2) }}
                 portfolio__image-wrapper--right
               {{ else }}
                 portfolio__image-wrapper--left
               {{ end }}"
             >
-              {{ if .link }}
-                <a href="{{ .link | safeURL }}" target="_blank" rel="noopener">
-                  <img class="portfolio__image" src="{{ .image | relURL }}" alt="{{ .name | markdownify }}" />
+              {{ if $p.link }}
+                <a href="{{ $p.link | safeURL }}" target="_blank" rel="noopener">
+                  <img class="portfolio__image" src="{{ $p.image | relURL }}" alt="{{ $p.name | markdownify }}" />
                 </a>
               {{ else }}
-                <img class="portfolio__image" src="{{ .image | relURL }}" alt="{{ .name | markdownify }}" />
+                <img class="portfolio__image" src="{{ $p.image | relURL }}" alt="{{ $p.name | markdownify }}" />
               {{ end }}
             </div>
           {{ end }}
           <div
-            class="portfolio__description {{ if (modBool $i 2) }}
+            class="portfolio__description {{ if (modBool $counter 2) }}
               portfolio__description--left
             {{ else }}
               portfolio__description--right
             {{ end }}"
           >
-            <h2>{{ .name | markdownify }}</h2>
+          {{ $displayName := replace $p.name "\\" "<br>" }}
+            <h2>{{ $displayName | markdownify }}</h2>
             <ul class="portfolio__meta">
+              {{ if $p.authors }}
+              <li class="portfolio__meta-item-authors"></li>
+                <em class="fas fa-pencil"></em>&nbsp
+                {{ $total := len $p.authors }} <!-- Store the total number of authors -->
+                
+                {{ range $index, $author := $p.authors }}
+                    <!-- <li class="{{ if eq $author "Silvia Sellán" }}portfolio__meta-item-authors-me{{ else }}portfolio__meta-item-authors{{ end }}"> -->
+                        <span class="{{ if or (eq $author "Silvia Sellán") (eq $author "Silvia Sellán*") }}portfolio__meta-item-authors-me{{ else }}portfolio__meta-item-authors{{ end }}">{{ $author }}{{ if ne (add $index 1) $total }},  {{ end }}</span>
+                         <!-- If it's not the last author, append comma -->
+                      
+                    </li>
+                {{ end }}
+              
+              {{ end }}
               {{ if .status }}
                 <li class="portfolio__meta-item">
                   <em class="fas fa-flag-checkered"></em>
                   <span>{{ .status }}</span>
                 </li>
               {{ end }}
-              {{ if .venue }}
-                <li class="portfolio__meta-item">
-                  <em class="fas fa-map-marker-alt"></em>
-                  <span>{{ .venue }}</span>
+              {{ if $p.venue }}
+                <li class="portfolio__meta-item-venue">
+                  <em class="fas fa-map-marker-alt"></em>&nbsp
+                  <span>{{ $p.venue }}</span>
                 </li>
               {{ end }}
               {{ if .start }}
@@ -61,28 +82,52 @@
                   <span>{{ .end }}</span>
                 </li>
               {{ end }}
-              {{ if .authors }}
-                {{ range .authors }}
-                  <li class="portfolio__meta-item">
-                    <em class="fas fa-at"></em>
-                    <span>{{ . }}</span>
-                  </li>
-                {{ end }}
-
-              {{ end }}
+              
             </ul>
-            <p>{{ .description | markdownify }}</p>
-            {{ if .link }}
+            <p>{{ $p.description | markdownify }}</p>
+            
               <div class="portfolio__button-wrapper">
-                <a class="portfolio__button" href="{{ .link | safeURL }}" target="_blank" rel="noopener">
-                  {{- if .linktext -}}
-                    {{ .linktext | markdownify }}
+                {{ if $p.link }}
+                <a class="portfolio__button" href="{{ $p.link | safeURL }}" target="_blank" rel="noopener">
+                  {{- if $p.linktext -}}
+                    {{ $p.linktext | markdownify }}
                   {{- else -}}
-                    Visit Site
+                    Project Page
                   {{- end -}}
                 </a>
+                {{else}}
+                  <a class="portfolio__button" href="" target="_blank" rel="noopener">
+                    Project Page (coming soon)
+                  </a>
+                {{ end }}
+                {{ if .pdflink }}
+                  <a class="portfolio__button" href="{{ .pdflink | safeURL }}" target="_blank" rel="noopener">
+                    {{- if $p.linktext -}}
+                      {{ $p.linktext | markdownify }}
+                    {{- else -}}
+                      Paper
+                    {{- end -}}
+                  </a>
+                {{else}}
+                  <a class="portfolio__button" href="" target="_blank" rel="noopener">
+                    Paper (coming soon)
+                  </a>
+                {{ end }}
+                {{ if .codelink }}
+                  <a class="portfolio__button" href="{{ .codelink | safeURL }}" target="_blank" rel="noopener">
+                    {{- if $p.linktext -}}
+                      {{ $p.linktext | markdownify }}
+                    {{- else -}}
+                      Code
+                    {{- end -}}
+                  </a>
+                {{else}}
+                  <a class="portfolio__button" href="" target="_blank" rel="noopener">
+                    Code (coming soon)
+                  </a>
+                {{ end }}
               </div>
-            {{ end }}
+            
             <div class="seperator">
               {{ range .tags }}
                 <p class="tag">{{ . }}</p>
@@ -90,8 +135,9 @@
             </div>
           </div>
         </div>
+        {{ $counter = add $counter 1 }}
       {{ end }}
     </div>
-  {{ end }}
+  <!-- {{ end }} -->
 
 {{ end }}
