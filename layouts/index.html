@@ -40,20 +40,21 @@
             animated fadeInDown
           {{ end }}"
         >
-        {{if .Params.image}}
-            <div class="post__thumbnail-wrapper">
-                <a href="{{ .RelPermalink }}">
-                    <img class="post__thumbnail" src="{{ .Params.image | relURL }}" alt="Thumbnail image" loading="lazy" />
-                </a>
-            </div>
-        {{end}}
+        
             <div class="post__content">
                 <h3>{{ .Title }}</h3>
+                {{if .Params.image}}
+                <div class="post__thumbnail-wrapper">
+                    <a href="{{ .RelPermalink }}">
+                        <img class="post__thumbnail" src="{{ .Params.image | relURL }}" alt="Thumbnail image" loading="lazy" />
+                    </a>
+                </div>
+                {{end}}
                 <p>{{ .Content | markdownify}}</p>
                 <!-- post content -->
                 
             </div>
-    
+            
             <!--  -->
             <div class="post__footer">
                 <!-- <em class="fas fa-calendar-day"></em>

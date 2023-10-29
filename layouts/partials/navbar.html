@@ -1,3 +1,5 @@
+<!-- if we're not hiding the navbar -->
+{{if not .Params.hidenavbar}}
 <div
   class="{{ with .Site.Params.doNotLoadAnimations }}
     .
@@ -110,3 +112,4 @@
     </ul>
   </nav>
 </div>
+{{end}}

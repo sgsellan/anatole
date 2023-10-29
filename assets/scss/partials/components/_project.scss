@@ -1,9 +1,10 @@
-.post {
+.project {
   margin: 30px;
 
   @include themed() {
     background-color: t('accent');
   }
+  
 
   &__meta {
     display: flex;
@@ -39,38 +40,115 @@
     }
   }
 
-  &__thumbnail {
-    // width: 100%;
-    // height: 100%;
-    height: $thumbnail-height;
-    // rescale the image to fit the thumbnail
-    object-fit: cover;
-    // object-fit: contain;
+  &__venue{
+    // italics
+    font-style: italic;
+    // grey
+    color: #777;
+    // center it in the wrapper
+    margin-left: auto;
+    margin-right: auto;
+    // bottom margin
+    margin-bottom: 10pt;
+  }
+  
+  &__authors{
+    // text a little bigger than the venue
+    
+    // a little bit of margin before teaser
+    margin-bottom: 15pt;
+    &-name{
+        font-size: 1.2em;
+        // bold
+        font-weight: bold;
+    }
+    &-affiliation{
+        font-size: 1.0em;
+        // grey
+        color: #777;
+    }
+
+  }
+
+  &__abstract{
+    // some left and right padding
+    margin-top: 5pt;
+    // grey text
+    color: #777;
+    // center it in the wrapper
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__teaser{
     display: block;
     // center it in the wrapper
     margin-left: auto;
     margin-right: auto;
-    // also center it vertically
-    
-
+    width: 100%;
     &-wrapper {
-      // make slightly bigger than the thumbnail
-      // width: 150%;
-      border-radius: 10px;
-      width: 75%;
-      margin-bottom: 2em;
-      margin-left: auto;
-      margin-right: auto;
-      overflow: hidden;
-      transition: box-shadow 0.3s ease;
-
-      @include themed() {
-        box-shadow: t('shadow');
+        // make slightly bigger than the thumbnail
+        // width: 150%;
+        border-radius: 10px;
+        width: 90%;
+        margin-bottom: 2em;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+        transition: box-shadow 0.3s ease;
+  
+        // @include themed() {
+        //   box-shadow: t('shadow');
+        // }
       }
-    }
+      &-caption{
+        margin-top: 5pt;
+        // grey text
+        color: #777;
+        // center it in the wrapper
+        margin-left: auto;
+        margin-right: auto;
+        // italics
+        font-style: italic;
+      }
   }
 
+//   &__thumbnail {
+//     // width: 100%;
+//     // height: 100%;
+//     height: $thumbnail-height;
+//     // rescale the image to fit the thumbnail
+//     object-fit: cover;
+//     // object-fit: contain;
+//     display: block;
+//     // center it in the wrapper
+//     margin-left: auto;
+//     margin-right: auto;
+//     // also center it vertically
+    
+
+//     &-wrapper {
+//       // make slightly bigger than the thumbnail
+//       // width: 150%;
+//       border-radius: 10px;
+//       width: 75%;
+//       margin-bottom: 2em;
+//       margin-left: auto;
+//       margin-right: auto;
+//       overflow: hidden;
+//       transition: box-shadow 0.3s ease;
+
+//       @include themed() {
+//         box-shadow: t('shadow');
+//       }
+//     }
+//   }
+
   &__content {
+    // pad left and right a little bit
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
     a {
       @include themed() {
         color: t('info');
@@ -97,8 +175,13 @@
     }
 
     pre {
-      padding: 5px;
+      padding: 10px;
       overflow-x: auto;
+      // change font to code font
+      font-family: monospace;
+      // add a little line spacing
+        line-height: 1.5em;
+      
 
       @include themed() {
         background-color: t('primary-lighter');
@@ -128,6 +211,7 @@
       font-weight: 600;
       letter-spacing: 1px;
       line-height: 1;
+      margin-top: 30pt;
 
       a {
         font-size: $font-size-h2;

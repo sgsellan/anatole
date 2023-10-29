@@ -1,0 +1,83 @@
+{{ define "main" }}
+  <div
+    class="project {{ with .Site.Params.doNotLoadAnimations }}
+      .
+    {{ else }}
+      animated fadeInDown
+    {{ end }}"
+  >
+    
+    <div class="project__content">
+    <h1>{{ title .Title }}</h1>
+
+    {{ if .Params.venue }}
+      <div class="project__venue">
+        {{ replace .Params.venue "\n" "<br />" | safeHTML }}
+      </div>
+    {{ end }}
+    
+
+    {{ if .Params.authors}} <!-- loop over all authors-->
+      <div class="project__authors">
+        {{ $total := len .Params.authors }} <!-- Store the total number of authors -->
+        {{ range $index, $author := .Params.authors }}
+          <span class="project__authors-name">{{ $author.name }}</span>, <span class="project__authors-affiliation">{{ $author.affiliation }}</span><br>
+          <!-- If it's not the last author, append comma -->
+        {{ end }}
+      </div>
+    {{ end }}
+    
+
+    {{ if .Params.teaser }}
+      <div class="project__teaser-wrapper">
+        <img class="project__teaser" src="{{ .Params.teaser | relURL }}" alt="Teaser image" />
+        {{if .Params.teaser_caption }}
+      <div class="project__teaser-caption">
+        {{ .Params.teaser_caption }}
+      </div>
+      {{end}}
+      </div>
+    {{ end }}
+    {{ if .Params.abstract }}
+      <h2>Abstract</h2>
+      <div class="project__abstract">
+        {{ .Params.abstract }}
+      </div>
+    {{ end }}
+    {{ if .Params.links }}
+    
+    <h2>Links</h2>
+    <ul class="project__links">
+        {{ range .Params.links }}
+        <li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a></li>
+        {{ end }}
+    </ul>
+    {{ end }}
+      {{ .Content }}
+
+    <!-- BIBTEX -->
+    {{ $authorNames := slice }}
+    {{ range .Params.authors }}
+        {{ $authorNames = $authorNames | append .name }}
+    {{ end }}
+    {{ if .Params.printbibtex}}
+    <h2>BibTex</h2>
+    <div class="project__bibtex">
+    <pre>{{ printf "@article{%s,\n  title = {%s},\n  author = {%s},\n  year = {%d},\n  journal = {%s}\n}" .Params.bibtexshort .Params.title (delimit $authorNames " and ") .Params.bibtexyear .Params.bibtexjournal }}</pre>
+      </div>
+    {{end}}
+
+    {{ if .Params.acknowledgements}}
+    <h2>Acknowledgements</h2>
+    <div class="project__acknowledgements">
+      <!-- parse such that \n is line break-->
+      {{ replace .Params.acknowledgements "\n" "<br />" | safeHTML }}
+    </div>
+    {{end}}
+
+
+    </div>
+    <div class="project__footer">
+    </div>
+  </div>
+{{ end }}
