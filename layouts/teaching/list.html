@@ -1,0 +1,117 @@
+{{ define "main" }}
+{{ $root := . }}
+  <!-- {{ range $index, $elemen:= .Site.Data.portfolio.portfolioitems }} -->
+    <div
+      class="post {{ with .Site.Params.doNotLoadAnimations }}
+        .
+      {{ else }}
+        animated fadeInDown
+      {{ end }}"
+    >
+      {{ $anchorTitle := "publications" }}
+      <h2 class="portfolio__title" id="{{ $anchorTitle | lower }}"> Courses</h2>
+      <!-- debugging -->
+      
+      <!-- {{ printf "%#v" $root.Site.Data }} -->
+      {{ $counter := 0 }}
+      {{ $publications := sort $root.Site.Data.courses "date" "desc" }}
+      {{ range $filename, $p := $publications }}
+        <div class="portfolio">
+          {{ if $p.image }}
+            <div
+              class="portfolio__image-wrapper {{ if (modBool $counter 2) }}
+                portfolio__image-wrapper--right
+              {{ else }}
+                portfolio__image-wrapper--left
+              {{ end }}"
+            >
+              {{ if $p.link }}
+                <a href="{{ $p.link | safeURL }}" target="_blank" rel="noopener">
+                  <img class="portfolio__image" src="{{ $p.image | relURL }}" alt="{{ $p.name | markdownify }}" />
+                </a>
+              {{ else }}
+                <img class="portfolio__image" src="{{ $p.image | relURL }}" alt="{{ $p.name | markdownify }}" />
+              {{ end }}
+            </div>
+          {{ end }}
+          <div
+            class="portfolio__description {{ if (modBool $counter 2) }}
+              portfolio__description--left
+            {{ else }}
+              portfolio__description--right
+            {{ end }}"
+          >
+          {{ $displayName := replace $p.name "\\" "<br>" }}
+            <h2>{{ $displayName | markdownify }}</h2>
+            <ul class="portfolio__meta">
+              {{ if $p.authors }}
+              <li class="portfolio__meta-item-authors"></li>
+                <em class="fas fa-pencil"></em>&nbsp
+                {{ $total := len $p.authors }} <!-- Store the total number of authors -->
+                
+                {{ range $index, $author := $p.authors }}
+                    <!-- <li class="{{ if eq $author "Silvia Sellán" }}portfolio__meta-item-authors-me{{ else }}portfolio__meta-item-authors{{ end }}"> -->
+                        <span class="{{ if or (eq $author "Silvia Sellán") (eq $author "Silvia Sellán*") }}portfolio__meta-item-authors-me{{ else }}portfolio__meta-item-authors{{ end }}">{{ $author }}{{ if ne (add $index 1) $total }},  {{ end }}</span>
+                         <!-- If it's not the last author, append comma -->
+                      
+                    </li>
+                {{ end }}
+              
+              {{ end }}
+              {{ if .status }}
+                <li class="portfolio__meta-item">
+                  <em class="fas fa-flag-checkered"></em>
+                  <span>{{ .status }}</span>
+                </li>
+              {{ end }}
+              {{ if $p.venue }}
+                <li class="portfolio__meta-item-venue">
+                  <em class="fas fa-map-marker-alt"></em>&nbsp
+                  <span>{{ $p.venue }}</span>
+                </li>
+              {{ end }}
+              {{ if .start }}
+                <li class="portfolio__meta-item">
+                  <em class="fas fa-arrow-up"></em>
+                  <span>{{ .start }}</span>
+                </li>
+              {{ end }}
+              {{ if .end }}
+                <li class="portfolio__meta-item">
+                  <em class="fas fa-arrow-down"></em>
+                  <span>{{ .end }}</span>
+                </li>
+              {{ end }}
+              
+            </ul>
+            <p>{{ $p.description | markdownify }}</p>
+            
+              <div class="portfolio__button-wrapper">
+                {{ if $p.link }}
+                <a class="portfolio__button" href="{{ $p.link | safeURL }}" target="_blank" rel="noopener">
+                  {{- if $p.linktext -}}
+                    {{ $p.linktext | markdownify }}
+                  {{- else -}}
+                    Course Website
+                  {{- end -}}
+                </a>
+                {{else}}
+                  <a class="portfolio__button" href="" target="_blank" rel="noopener">
+                    Course Website (coming soon)
+                  </a>
+                {{ end }}
+              </div>
+            
+            <div class="seperator">
+              {{ range .tags }}
+                <p class="tag">{{ . }}</p>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+        {{ $counter = add $counter 1 }}
+      {{ end }}
+    </div>
+  <!-- {{ end }} -->
+
+{{ end }}

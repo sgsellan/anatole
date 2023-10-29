@@ -21,9 +21,15 @@
           <a href="{{ .Site.BaseURL | relLangURL }}">{{ .Site.Params.Title }}</a>
         </div>
       {{ end }}
+      {{ if .Site.Params.new }}
+        <div class="sidebar__introduction-description-new"><em class="fas fa-star"></em>
+          <span class="sidebar__introduction-new-text">{{.Site.Params.new}} </span><em class="fas fa-star"></em>
+        </div>
+      {{ end }}
       <div class="sidebar__introduction-description">
         <p>{{ replace .Site.Params.description "\n" "<br />" | safeHTML }}</p>
       </div>
+      
     </div>
     <ul class="sidebar__list">
       {{ range $item := .Site.Params.socialIcons }}

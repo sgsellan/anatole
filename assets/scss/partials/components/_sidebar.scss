@@ -50,13 +50,20 @@
     text-align: center;
 
     &-description {
-      margin: 0 1em;
+      margin: 0 5em;
+      &-new{
+        // margin: 0 5em;
+        margin-top: 1em;
+        // bold
+        font-weight: bold;
+        color: #8A360F;
+      }
     }
 
     &-profileimage {
-      width: 127px;
-      height: 127px;
-      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      border-radius: 10%;
     }
 
     &-title {
@@ -64,7 +71,7 @@
       font-weight: bold;
       letter-spacing: 2px;
       line-height: 1;
-      margin: 1em;
+      margin-top: 2em;
 
       a {
         font-size: 3.2rem;
