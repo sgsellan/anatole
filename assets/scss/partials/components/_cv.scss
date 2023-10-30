@@ -1,0 +1,144 @@
+.cv {
+  position: relative;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-top: 48px;
+
+  &__title {
+    letter-spacing: 1px;
+    font-size: 2.6rem;
+    // line-height: 2.5;
+    font-weight: 600;
+    margin-top: 20px;
+  }
+
+ &__item{
+    padding-top: 10px;
+    &-referee{
+      padding-top: 10px;
+    }
+    // &-experience{
+    // }
+    // &-education{
+    // }
+ }
+
+ &-description{
+    // italics
+    font-style: italic;
+    // grey
+    color: #777;
+    // tinier
+    font-size: 1.4rem;
+    text-align: justify;
+ }
+
+  // STYLE OF EACH item
+  &-institution, &-name{
+    font-size: 1.6rem;
+    font-weight: 600;
+    // margin-bottom: 0.5rem;
+    margin-top: 0px;
+  }
+  &-degree{
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+  &-position, &-agency{
+    font-size: 1.4rem;
+    font-weight: 400;
+    &-supervisor, &-amount{
+      // italics
+      font-style: italic;
+    }
+  }
+  &-dates{
+    // italics
+    font-style: italic;
+    // grey
+    color: #777;
+    // tinier
+    font-size: 1.4rem;
+  }
+  &__publication{
+    &-title{
+      font-size: 1.6rem;
+      font-weight: 600;
+      // margin-top: 0px;
+    }
+    &-author{
+      font-size: 1.4rem;
+      font-weight: 400;
+      // margin-top: 0px;
+      &-me{
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
+    }
+    &-venue{
+      // italics
+      font-style: italic;
+      // grey
+      color: #777;
+      // tinier
+      font-size: 1.4rem;
+    }
+    &-description{
+      // italics
+      font-style: italic;
+      // grey
+      color: #777;
+      // tinier
+      font-size: 1.4rem;
+    }
+  }
+
+  &-feedback{
+    // italics
+    font-style: normal;
+    // grey
+    // color: #777;
+    // tinier
+    font-size: 1.2rem;
+    // left and right margin
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    // justify
+    text-align: justify;
+  }
+
+  &-session{
+    // tiny
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+    &-description{
+      // italics
+      font-style: italic;
+      // grey
+      color: #777;
+      // tinier
+      font-size: 1.3rem;
+    }
+    &-where, &-when{
+      // fluish right
+      text-align: right;
+
+    }
+  }
+
+}
+
+// .institution{
+//   font-size: 1.6rem;
+//   font-weight: 600;
+//   margin-bottom: 0.5rem;
+//   margin-top: 
+// }
+
+// .cv__item {
+//   margin-top: 200px;  // adjust as needed
+//   margin-bottom: 200px;  // adjust as needed
+// }

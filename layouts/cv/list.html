@@ -1,0 +1,282 @@
+{{ define "main" }}
+{{ $root := . }}
+<div
+class="post {{ with .Site.Params.doNotLoadAnimations }}
+  .
+{{ else }}
+  animated fadeInDown
+{{ end }}"
+>
+
+<!-- HEADER -->
+
+<!-- EDUCATION -->
+<div class="cv__title">Education</div>
+
+<!-- loop over the data in .Site.Data.cv.education -->
+{{ range $index, $elemen:= sort .Site.Data.cv.education "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-education">
+  <div class="cv-institution">{{ $elemen.institution }}</div>
+  <div class="cv-degree">{{ $elemen.degree }}</div>
+  <div class="cv-dates">{{ $elemen.dates }}</div>
+</div>
+</div>
+{{ end }}
+
+<!-- WORK EXPERIENCE -->
+<div class="cv__title">Experience</div>
+
+<!-- loop over the data in .Site.Data.cv.experience -->
+{{ range $index, $elemen:= sort .Site.Data.cv.experience "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-experience">
+  <div class="cv-institution">{{ $elemen.institution }}</div>
+  <div class="cv-position">{{ $elemen.position }} -<span class="cv-position-supervisor"> {{ $elemen.supervisor }}</span></div>
+  <div class="cv-dates">{{ $elemen.dates }}</div>
+</div>
+</div>
+{{ end }}
+
+<!-- PUBLICATIONS -->
+
+<div class="cv__title">Conference & Journal Publications</div>
+{{ $publications := sort $root.Site.Data.publications "date" "desc" }}
+{{ $totalPublications := len $publications }}
+{{ range $index, $p := $publications }}
+{{ $displayName := replace $p.name "\\" "" }}
+<div class="cv__item">
+<div class="cv__item-publication">
+  <div class="cv__publication-title">{{ add $totalPublications (mul $index -1) }}. {{ $displayName }}</div>
+  {{ $total := len $p.authors }} <!-- Store the total number of authors -->  
+  {{ range $index, $author := $p.authors }}
+  <span class="{{ if or (eq $author "Silvia Sellán") (eq $author "Silvia Sellán*") }}cv__publication-author-me{{ else }}cv__publication-author{{ end }}">{{ $author }}{{ if ne (add $index 1) $total }},  {{ end }}</span>
+  {{ end }}
+  <div class="cv__publication-venue">{{ $p.venue }}</span>
+</div>
+</div>
+{{ end }}
+
+<!-- OTHER PUBLICATIONS -->
+
+<div class="cv__title">Other Publications</div>
+{{ $publications := sort $root.Site.Data.cv.other_publications "date" "desc" }}
+{{ $totalPublications := len $publications }}
+{{ range $index, $p := $publications }}
+{{ $displayName := replace $p.name "\\" "" }}
+<div class="cv__item">
+<div class="cv__item-publication">
+  <div class="cv__publication-title">{{ add $totalPublications (mul $index -1) }}. {{ $displayName }}</div>
+  {{ $total := len $p.authors }} <!-- Store the total number of authors -->  
+  {{ range $index, $author := $p.authors }}
+  <span class="{{ if or (eq $author "Silvia Sellán") (eq $author "Silvia Sellán*") }}cv__publication-author-me{{ else }}cv__publication-author{{ end }}">{{ $author }}{{ if ne (add $index 1) $total }},  {{ end }}</span>
+  {{ end }}
+  <div class="cv__publication-venue">{{ $p.venue }}</span>
+</div>
+</div>
+{{ end }}
+
+<!-- PATENTS -->
+
+<div class="cv__title">Patents</div>
+{{ $publications := sort $root.Site.Data.cv.patents "date" "desc" }}
+{{ $totalPublications := len $publications }}
+{{ range $index, $p := $publications }}
+{{ $displayName := replace $p.name "\\" "" }}
+<div class="cv__item">
+<div class="cv__item-patent">
+  <div class="cv__publication-title">{{ add $totalPublications (mul $index -1) }}. {{ $displayName }}</div>
+  {{ $total := len $p.authors }} <!-- Store the total number of authors -->  
+  {{ range $index, $author := $p.authors }}
+  <span class="{{ if or (eq $author "Silvia Sellán") (eq $author "Silvia Sellán*") }}cv__publication-author-me{{ else }}cv__publication-author{{ end }}">{{ $author }}{{ if ne (add $index 1) $total }},  {{ end }}</span>
+  {{ end }}
+  <div class="cv__publication-description">{{ $p.description }}</span>
+</div>
+</div>
+{{ end }}
+
+<div class="cv__title">Software</div>
+{{ $publications := sort $root.Site.Data.software "date" "desc" }}
+{{ $totalPublications := len $publications }}
+{{ range $index, $p := $publications }}
+{{ $displayName := replace $p.name "\\" "" }}
+<div class="cv__item">
+<div class="cv__item-patent">
+  <div class="cv__publication-title">{{ $displayName }}</div>
+  {{ $total := len $p.authors }} <!-- Store the total number of authors -->  
+  {{ range $index, $author := $p.authors }}
+  <span class="{{ if or (eq $author "Silvia Sellán") (eq $author "Silvia Sellán*") }}cv__publication-author-me{{ else }}cv__publication-author{{ end }}">{{ $author }}{{ if ne (add $index 1) $total }},  {{ end }}</span>
+  {{ end }}
+  <div class="cv__publication-description">{{ $p.description }}</span>
+</div>
+</div>
+{{ end }}
+
+<!-- AWARDS & HONORS -->
+<div class="cv__title">Awards & Honors</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.awards "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-award">
+  <div class="cv-name">{{ $elemen.name }}</div>
+  <div class="cv-agency">{{ $elemen.agency }} -<span class="cv-agency-amount"> {{ $elemen.amount }}</span></div>
+  {{ if $elemen.description }}
+  <div class="cv-description">{{ $elemen.description }}</div>
+  {{ end }}
+  <div class="cv-dates">{{ $elemen.dates }}</div>
+</div>
+</div>
+{{ end }}
+
+<!-- ACADEMIC SERVICE -->
+<div class="cv__title">Academic Committee Service</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.academic_service "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-award">
+  <div class="cv-name">{{ $elemen.name }}</div>
+  <div class="cv-position">{{ $elemen.position }}</div>
+  <div class="cv-dates">{{ $elemen.dates }}</div>
+</div>
+</div>
+{{ end }}
+
+<!-- REFEREEING SERVICE -->
+<div class="cv__title">Journal Referee Service</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.referee_service "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item-referee">
+  <span class="cv-name">{{ $elemen.name }}</span>, <span class="cv-dates">{{ $elemen.dates }}</span>
+</div>
+{{ end }}
+
+<!-- DEPARTMENTAL SERVICE -->
+<div class="cv__title">Departmental Service</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.departmental_service "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-service">
+  <div class="cv-name">{{ $elemen.name }}</div>
+  <div class="cv-position">{{ $elemen.position }}</div>
+  <div class="cv-dates">{{ $elemen.dates }}</div>
+</div>
+</div>
+{{ end }}
+
+<!-- TALKS -->
+<div class="cv__title">Talks Given</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.talks "order" "desc" }}
+<div class="cv__item">
+  <div class="cv__item-talk">
+    <div class="cv-name">{{ $elemen.name }}</div>
+    <!-- loop over all "sessions" in $elemen-->
+    {{ range $index, $session := $elemen.sessions }}
+    <div class="cv-session">
+      <!-- <div class="cv-session-title">{{ $session.title }}</div> -->
+      <span class="cv-session-venue">{{ $session.venue }}</span>
+      - <span class="cv-session-description">{{ $session.description }}</span> &nbsp&nbsp | &nbsp&nbsp <span class="cv-session-where">{{ $session.where }}</span>, <span class="cv-session-when">{{ $session.when }}</span>
+    </div>
+    {{ end }}
+  </div>
+{{ end }}
+</div>
+
+<!-- IN THE NEWS -->
+<div class="cv__title">In the News</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.news "order" "desc" }}
+<div class="cv__item">
+  <div class="cv__item-news">
+    <div class="cv-name">{{ $elemen.name }}</div>
+    <div class="cv-position">{{ $elemen.description }}</div>
+    <div class="cv-dates">{{ $elemen.dates }}</div>
+  </div>
+</div>
+{{ end }}
+
+
+<!-- Organizing -->
+<div class="cv__title">Organizing</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.organizing "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-organizing">
+  <div class="cv-name">{{ $elemen.name }}</div>
+  <div class="cv-position">{{ $elemen.position }}</div>
+  <div class="cv-dates">{{ $elemen.dates }}</div>
+</div>
+</div>
+{{ end }}
+
+<!-- TEACHING -->
+<div class="cv__title">Teaching</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.teaching "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-teaching">
+  <div class="cv-name">{{ $elemen.name }}</div>
+  <div class="cv-position">{{ $elemen.position }}</div>
+  <div class="cv-dates">{{ $elemen.dates }}</div>
+</div>
+</div>
+{{ end }}
+
+<div class="cv__title">Teaching Feedback</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.teaching.feedback "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-teaching">
+  <div class="cv-name">{{ $elemen.name }} | <span class="cv-dates"> {{ $elemen.date }}</div></div>
+  <div class="cv-description">{{ $elemen.description }} </div>
+  {{ range $index, $feedback := $elemen.items }}
+    <div class="cv-feedback"> "{{ $feedback.text }}" </div>
+  {{ end }}
+</div>
+</div>
+{{ end }}
+
+<!-- MENTORING -->
+<div class="cv__title">Mentoring</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.mentoring "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-mentoring">
+  <div class="cv-name">{{ $elemen.name }}</div>
+  <div class="cv-position">{{ $elemen.position }}</div>
+  <div class="cv-dates">{{ $elemen.dates }}</div>
+</div>
+</div>
+{{ end }}
+
+<div class="cv__title">Mentoring Feedback</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.mentoring.feedback "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-mentoring">
+  <div class="cv-name">{{ $elemen.name }} | <span class="cv-dates"> {{ $elemen.date }}</div></div>
+  <div class="cv-description">{{ $elemen.description }} </div>
+  {{ range $index, $feedback := $elemen.items }}
+    <div class="cv-feedback"> "{{ $feedback.text }}" </div>
+  {{ end }}
+</div>
+</div>
+{{ end }}
+
+<!-- VOLUNTEERING -->
+<div class="cv__title">Non-academic Volunteering</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.volunteering "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-volunteering">
+  <div class="cv-name">{{ $elemen.name }}</div>
+  <div class="cv-position">{{ $elemen.position }}</div>
+  <div class="cv-dates">{{ $elemen.dates }}</div>
+</div>
+</div>
+{{ end }}
+
+
+
+</div>
+{{ end }}
