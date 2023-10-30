@@ -4,14 +4,15 @@
   font-family: inherit;
 }
 
-body {
-  @include ltr {
-    font-family: 'PingHei', 'PingFang SC', 'Helvetica Neue', 'Work Sans', 'Hiragino Sans GB', sans-serif;
-    font-size: 1.6rem;
-  }
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
+@import url(//fonts.googleapis.com/css?family=Crimson+Text);
 
-  @include rtl {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 1.5rem;
-  }
+// @font-face {
+//   font-family: 'testfont'; /* You can name it whatever you like */
+//   src: url('fonts/YourFontFile.ttf') format('truetype'); /* path to your font file */
+// }
+
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 1.6rem;
 }
