@@ -9,44 +9,45 @@
       {{ end }}"
     >
       {{ $anchorTitle := "publications" }}
-      <h2 class="portfolio__title" id="{{ $anchorTitle | lower }}"> Journal & Conference Publications</h2>
+      <h2 class="compressedportfolio__title" id="{{ $anchorTitle | lower }}"> Journal & Conference Publications</h2>
       <!-- debugging -->
-      <a href="/publications_compressed/">Click here for compressed view</a>
+      
+      <a href="/publications/">Click here for expanded view</a>
       
       <!-- {{ printf "%#v" $root.Site.Data }} -->
       {{ $counter := 0 }}
       {{ $publications := sort $root.Site.Data.publications "date" "desc" }}
       {{ range $filename, $p := $publications }}
-        <div class="portfolio">
+        <div class="compressedportfolio">
           {{ if $p.image }}
             <div
-              class="portfolio__image-wrapper {{ if (modBool $counter 2) }}
-                portfolio__image-wrapper--right
+              class="compressedportfolio__image-wrapper {{ if (modBool $counter 2) }}
+              compressedportfolio__image-wrapper--right
               {{ else }}
-                portfolio__image-wrapper--left
+              compressedportfolio__image-wrapper--left
               {{ end }}"
             >
               {{ if $p.link }}
                 <a href="{{ $p.link | safeURL }}" target="_blank" rel="noopener">
-                  <img class="portfolio__image" src="{{ $p.image | relURL }}" alt="{{ $p.name | markdownify }}" />
+                  <img class="compressedportfolio__image" src="{{ $p.image | relURL }}" alt="{{ $p.name | markdownify }}" />
                 </a>
               {{ else }}
-                <img class="portfolio__image" src="{{ $p.image | relURL }}" alt="{{ $p.name | markdownify }}" />
+                <img class="compressedportfolio__image" src="{{ $p.image | relURL }}" alt="{{ $p.name | markdownify }}" />
               {{ end }}
             </div>
           {{ end }}
           <div
-            class="portfolio__description {{ if (modBool $counter 2) }}
-              portfolio__description--left
+            class="compressedportfolio__description {{ if (modBool $counter 2) }}
+            compressedportfolio__description--left
             {{ else }}
-              portfolio__description--right
+            compressedportfolio__description--right
             {{ end }}"
           >
           {{ $displayName := replace $p.name "\\" "<br>" }}
-            <h2>{{ $displayName | markdownify }}</h2>
-            <ul class="portfolio__meta">
+            <div class="compressedportfolio__meta-item-title">{{ $displayName | markdownify }}</div>
+            <ul class="compressedportfolio__meta">
               {{ if $p.authors }}
-              <li class="portfolio__meta-item-authors"></li>
+              <li class="compressedportfolio__meta-item-authors"></li>
                 <em class="fas fa-pencil"></em>&nbsp
                 {{ $total := len $p.authors }} <!-- Store the total number of authors -->
                 
@@ -60,36 +61,36 @@
               
               {{ end }}
               {{ if .status }}
-                <li class="portfolio__meta-item">
+                <li class="compressedportfolio__meta-item">
                   <em class="fas fa-flag-checkered"></em>
                   <span>{{ .status }}</span>
                 </li>
               {{ end }}
               {{ if $p.venue }}
-                <li class="portfolio__meta-item-venue">
+                <li class="compressedportfolio__meta-item-venue">
                   <em class="fas fa-map-marker-alt"></em>&nbsp
                   <span>{{ $p.venue }}</span>
                 </li>
               {{ end }}
               {{ if .start }}
-                <li class="portfolio__meta-item">
+                <li class="compressedportfolio__meta-item">
                   <em class="fas fa-arrow-up"></em>
                   <span>{{ .start }}</span>
                 </li>
               {{ end }}
               {{ if .end }}
-                <li class="portfolio__meta-item">
+                <li class="compressedportfolio__meta-item">
                   <em class="fas fa-arrow-down"></em>
                   <span>{{ .end }}</span>
                 </li>
               {{ end }}
               
             </ul>
-            <p>{{ $p.description | markdownify }}</p>
+            <!-- <p>{{ $p.description | markdownify }}</p> -->
             
-              <div class="portfolio__button-wrapper">
+              <div class="compressedportfolio__button-wrapper">
                 {{ if $p.link }}
-                <a class="portfolio__button" href="{{ $p.link | safeURL }}" target="_blank" rel="noopener">
+                <a class="compressedportfolio__button" href="{{ $p.link | safeURL }}" target="_blank" rel="noopener">
                   {{- if $p.linktext -}}
                     {{ $p.linktext | markdownify }}
                   {{- else -}}
@@ -97,12 +98,12 @@
                   {{- end -}}
                 </a>
                 {{else}}
-                  <a class="portfolio__button" href="" target="_blank" rel="noopener">
+                  <a class="compressedportfolio__button" href="" target="_blank" rel="noopener">
                     Project Page (coming soon)
                   </a>
                 {{ end }}
                 {{ if .pdflink }}
-                  <a class="portfolio__button" href="{{ .pdflink | safeURL }}" target="_blank" rel="noopener">
+                  <a class="compressedportfolio__button" href="{{ .pdflink | safeURL }}" target="_blank" rel="noopener">
                     {{- if $p.linktext -}}
                       {{ $p.linktext | markdownify }}
                     {{- else -}}
@@ -110,12 +111,12 @@
                     {{- end -}}
                   </a>
                 {{else}}
-                  <a class="portfolio__button" href="" target="_blank" rel="noopener">
+                  <a class="compressedportfolio__button" href="" target="_blank" rel="noopener">
                     Paper (coming soon)
                   </a>
                 {{ end }}
                 {{ if .codelink }}
-                  <a class="portfolio__button" href="{{ .codelink | safeURL }}" target="_blank" rel="noopener">
+                  <a class="compressedportfolio__button" href="{{ .codelink | safeURL }}" target="_blank" rel="noopener">
                     {{- if $p.linktext -}}
                       {{ $p.linktext | markdownify }}
                     {{- else -}}
@@ -123,7 +124,7 @@
                     {{- end -}}
                   </a>
                 {{else}}
-                  <a class="portfolio__button" href="" target="_blank" rel="noopener">
+                  <a class="compressedportfolio__button" href="" target="_blank" rel="noopener">
                     Code (coming soon)
                   </a>
                 {{ end }}
