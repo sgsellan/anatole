@@ -9,6 +9,11 @@ class="post {{ with .Site.Params.doNotLoadAnimations }}
 >
 
 <!-- HEADER -->
+<div class="cv__header">
+<div class="cv__header__name">{{ .Site.Params.title }}</div>
+<div class="cv__header__email"><a href="{{ .Site.Params.email}}">{{ .Site.Params.email }}</a></div>
+<div class="cv__header__address"><a href="{{ .Site.BaseURL}}"> www.silviasellan.com </a></div>
+</div>
 
 <!-- EDUCATION -->
 <div class="cv__title">Education</div>

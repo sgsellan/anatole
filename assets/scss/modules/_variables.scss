@@ -23,3 +23,5 @@ $content-max-width: calc(#{$body-max-width} * #{$content-ratio});
 $sidebar-max-width: calc(#{$body-max-width} - #{$content-max-width});
 $content-width: calc(#{$content-ratio} * 100%);
 $sidebar-width: calc(#{$sidebar-ratio} * 100%);
+
+$color2: #8A360F;
