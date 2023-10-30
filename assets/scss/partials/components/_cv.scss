@@ -142,6 +142,15 @@
     //   // text color
     //   color: $color2;
     // }
+   &-pdflink{
+      // text color
+      // italic
+      font-style: italic;
+      color: $color2 !important;
+      // flush right
+      // text-align: right;
+      // margin-top: 10px;
+   }
   }
 
 }
