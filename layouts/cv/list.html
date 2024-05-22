@@ -16,6 +16,21 @@ class="post {{ with .Site.Params.doNotLoadAnimations }}
 </div>
 <div class="cv__header-pdflink"><a href="{{ .Site.Params.cvdir}}"> Click for PDF</a></div>
 
+<!-- ACADEMIC APPOINTMENTS -->
+<div class="cv__title">Academic Appointments</div>
+<!-- loop over the data in .Site.Data.cv.academic_appointments -->
+{{ range $index, $elemen:= sort .Site.Data.cv.appointments "order" "desc" }}
+<div class="cv__item">
+  <div class="cv__item-education">
+    <div class="cv-institution">{{ $elemen.institution }} </div>
+    <div class="cv-degree">{{ $elemen.department }}</div>
+    <div class="cv-position">{{ $elemen.position }}</div>
+    <div class="cv-dates">{{ $elemen.dates }}</div>
+  </div>
+  </div>
+  {{ end }}
+
+
 <!-- EDUCATION -->
 <div class="cv__title">Education</div>
 
@@ -31,20 +46,6 @@ class="post {{ with .Site.Params.doNotLoadAnimations }}
 </div>
 {{ end }}
 
-<!-- WORK EXPERIENCE -->
-<div class="cv__title">Experience</div>
-
-<!-- loop over the data in .Site.Data.cv.experience -->
-{{ range $index, $elemen:= sort .Site.Data.cv.experience "order" "desc" }}
-<!-- write institution, degree and year -->
-<div class="cv__item">
-<div class="cv__item-experience">
-  <div class="cv-institution">{{ $elemen.institution }}</div>
-  <div class="cv-position">{{ $elemen.position }} -<span class="cv-position-supervisor"> {{ $elemen.supervisor }}</span></div>
-  <div class="cv-dates">{{ $elemen.dates }}</div>
-</div>
-</div>
-{{ end }}
 
 <!-- PUBLICATIONS -->
 
@@ -135,6 +136,22 @@ class="post {{ with .Site.Params.doNotLoadAnimations }}
 </div>
 </div>
 {{ end }}
+
+<!-- WORK EXPERIENCE -->
+<div class="cv__title">Other Research Experience</div>
+
+<!-- loop over the data in .Site.Data.cv.experience -->
+{{ range $index, $elemen:= sort .Site.Data.cv.experience "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-experience">
+  <div class="cv-institution">{{ $elemen.institution }}</div>
+  <div class="cv-position">{{ $elemen.position }} -<span class="cv-position-supervisor"> {{ $elemen.supervisor }}</span></div>
+  <div class="cv-dates">{{ $elemen.dates }}</div>
+</div>
+</div>
+{{ end }}
+
 
 <!-- ACADEMIC SERVICE -->
 <div class="cv__title">Academic Committee Service</div>
