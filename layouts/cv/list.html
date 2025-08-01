@@ -46,6 +46,38 @@ class="post {{ with .Site.Params.doNotLoadAnimations }}
 </div>
 {{ end }}
 
+<!-- AWARDS & HONORS -->
+<div class="cv__title">Awards & Honors</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.awards "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-award">
+  <div class="cv-name">{{ $elemen.name }}</div>
+  <div class="cv-agency">{{ $elemen.agency }} -<span class="cv-agency-amount"> {{ $elemen.amount }}</span></div>
+  {{ if $elemen.description }}
+  <div class="cv-description">{{ $elemen.description }}</div>
+  {{ end }}
+  <div class="cv-dates">{{ $elemen.dates }}</div>
+</div>
+</div>
+{{ end }}
+
+<!-- Research Funding -->
+<div class="cv__title">Research Funding</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.funding "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-award">
+  <div class="cv-name">{{ $elemen.name }}</div>
+  <div class="cv-agency">{{ $elemen.agency }} -<span class="cv-agency-amount"> {{ $elemen.amount }}</span></div>
+  {{ if $elemen.description }}
+  <div class="cv-description">{{ $elemen.description }}</div>
+  {{ end }}
+  <div class="cv-dates">{{ $elemen.dates }}</div>
+</div>
+</div>
+{{ end }}
+
 
 <!-- PUBLICATIONS -->
 
@@ -117,22 +149,6 @@ class="post {{ with .Site.Params.doNotLoadAnimations }}
   <span class="{{ if or (eq $author "Silvia Sellán") (eq $author "Silvia Sellán*") }}cv__publication-author-me{{ else }}cv__publication-author{{ end }}">{{ $author }}{{ if ne (add $index 1) $total }},  {{ end }}</span>
   {{ end }}
   <div class="cv__publication-description">{{ $p.description }}</span>
-</div>
-</div>
-{{ end }}
-
-<!-- AWARDS & HONORS -->
-<div class="cv__title">Awards & Honors</div>
-{{ range $index, $elemen:= sort .Site.Data.cv.awards "order" "desc" }}
-<!-- write institution, degree and year -->
-<div class="cv__item">
-<div class="cv__item-award">
-  <div class="cv-name">{{ $elemen.name }}</div>
-  <div class="cv-agency">{{ $elemen.agency }} -<span class="cv-agency-amount"> {{ $elemen.amount }}</span></div>
-  {{ if $elemen.description }}
-  <div class="cv-description">{{ $elemen.description }}</div>
-  {{ end }}
-  <div class="cv-dates">{{ $elemen.dates }}</div>
 </div>
 </div>
 {{ end }}
