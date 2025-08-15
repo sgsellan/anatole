@@ -78,6 +78,20 @@ class="post {{ with .Site.Params.doNotLoadAnimations }}
 </div>
 {{ end }}
 
+<!-- MENTORING -->
+<div class="cv__title">Students and Postdocs</div>
+{{ range $index, $elemen:= sort .Site.Data.cv.mentoring "order" "desc" }}
+<!-- write institution, degree and year -->
+<div class="cv__item">
+<div class="cv__item-mentoring">
+  <div class="cv-name">{{ $elemen.name }}</div>
+  <div class="cv-position">{{ $elemen.position }}</div>
+  <div class="cv-dates">{{ $elemen.dates }}</div>
+</div>
+</div>
+{{ end }}
+
+
 
 <!-- PUBLICATIONS -->
 
@@ -275,32 +289,6 @@ class="post {{ with .Site.Params.doNotLoadAnimations }}
 </div>
 {{ end }}
 
-<!-- MENTORING -->
-<div class="cv__title">Students and Postdocs</div>
-{{ range $index, $elemen:= sort .Site.Data.cv.mentoring "order" "desc" }}
-<!-- write institution, degree and year -->
-<div class="cv__item">
-<div class="cv__item-mentoring">
-  <div class="cv-name">{{ $elemen.name }}</div>
-  <div class="cv-position">{{ $elemen.position }}</div>
-  <div class="cv-dates">{{ $elemen.dates }}</div>
-</div>
-</div>
-{{ end }}
-
-<!-- <div class="cv__title">Mentoring Feedback</div>
-{{ range $index, $elemen:= sort .Site.Data.cv.mentoring.feedback "order" "desc" }} -->
-<!-- write institution, degree and year -->
-<!-- <div class="cv__item">
-<div class="cv__item-mentoring">
-  <div class="cv-name">{{ $elemen.name }} | <span class="cv-dates"> {{ $elemen.date }}</div></div>
-  <div class="cv-description">{{ $elemen.description }} </div>
-  {{ range $index, $feedback := $elemen.items }}
-    <div class="cv-feedback"> "{{ $feedback.text }}" </div>
-  {{ end }}
-</div>
-</div>
-{{ end }} -->
 
 
 
