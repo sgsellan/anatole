@@ -31,7 +31,7 @@
     </div>
     <!-- Print all featured pages to see what's being fetched -->
     <!-- {{ printf "Featured pages: %v" (where .Site.RegularPages "Type" "featured") }} -->
-    {{ $featured := first 2 (where .Site.RegularPages "Type" "featured") }}
+    {{ $featured := first 1 (where .Site.RegularPages "Type" "featured") }}
     {{ range $featured }}
         <div
           class="post {{ with $.Site.Params.doNotLoadAnimations }}
